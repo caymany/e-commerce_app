@@ -2,6 +2,7 @@ import 'package:devhub_kenya/common/widgets/appbar/appbar.dart';
 import 'package:devhub_kenya/common/widgets/icons/d_circular_icon.dart';
 import 'package:devhub_kenya/common/widgets/layout/grid_layout.dart';
 import 'package:devhub_kenya/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:devhub_kenya/features/shop/models/product_model.dart';
 import 'package:devhub_kenya/features/shop/screens/home/home.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class FavoriteScreen extends StatelessWidget {
             children: [
               DGridLayout(
                   itemCount: 6,
-                  itemBuilder: (_, index) => const DProductCardVertical()),
+                  itemBuilder: (_, index) => DProductCardVertical(product: ProductModel.empty())),
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:devhub_kenya/common/widgets/layout/grid_layout.dart';
 import 'package:devhub_kenya/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:devhub_kenya/features/shop/models/product_model.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -22,7 +23,7 @@ class DSortableProducts extends StatelessWidget {
         const SizedBox(height: DSizes.spaceBtwItems),
 
         ///Products Section
-        DGridLayout(itemCount: 8, itemBuilder: (_, index) => const DProductCardVertical()),
+        DGridLayout(itemCount: 8, itemBuilder: (_, index) => DProductCardVertical(product: ProductModel.empty())),
       ],
     );
   }

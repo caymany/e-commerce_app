@@ -3,6 +3,7 @@ import 'package:devhub_kenya/common/widgets/layout/grid_layout.dart';
 import 'package:devhub_kenya/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:devhub_kenya/common/widgets/texts/section_heading.dart';
 import 'package:devhub_kenya/features/shop/models/category_model.dart';
+import 'package:devhub_kenya/features/shop/models/product_model.dart';
 import 'package:devhub_kenya/utils/constants/image_strings.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class DCategoryTab extends StatelessWidget {
             DSectionHeading(title: 'You might like', showActionButton: true,onPressed: (){}),
             const SizedBox(height: DSizes.spaceBtwItems),
 
-            DGridLayout(itemCount: 4, itemBuilder: (_, index) => const DProductCardVertical()),
+            DGridLayout(itemCount: 4, itemBuilder: (_, index) => DProductCardVertical(product: ProductModel.empty())),
             const SizedBox(height: DSizes.spaceBtwSections),
           ],
         ),

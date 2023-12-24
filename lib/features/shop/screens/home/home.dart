@@ -3,11 +3,12 @@ import 'package:devhub_kenya/common/widgets/custom_shapes/containers/search_cont
 import 'package:devhub_kenya/common/widgets/layout/grid_layout.dart';
 import 'package:devhub_kenya/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:devhub_kenya/common/widgets/texts/section_heading.dart';
+import 'package:devhub_kenya/features/shop/controllers/product_controller.dart';
 import 'package:devhub_kenya/features/shop/screens/all_products/all_products.dart';
 import 'package:devhub_kenya/features/shop/screens/home/widgets/home_catgories.dart';
 import 'package:devhub_kenya/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:devhub_kenya/utils/constants/colors.dart';
-import 'package:devhub_kenya/utils/constants/image_strings.dart';
+import 'package:devhub_kenya/utils/shimmers/vertical_product_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -30,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: DSizes.spaceBtwSections),
 
                   /// Searchbar
-                   DSearchContainer(text: 'Search in Store'),
+                  DSearchContainer(text: 'Search in Store'),
                   SizedBox(height: DSizes.spaceBtwSections),
 
                   /// Categories
@@ -42,14 +44,14 @@ class HomeScreen extends StatelessWidget {
                             title: 'Popular Categories',
                             showActionButton: false,
                             textColor: DColors.white),
-                         SizedBox(height: DSizes.spaceBtwItems),
+                        SizedBox(height: DSizes.spaceBtwItems),
 
                         /// Scrollable
-                         DHomeCategories()
+                        DHomeCategories()
                       ],
                     ),
                   ),
-                   SizedBox(height: DSizes.spaceBtwSections),
+                  SizedBox(height: DSizes.spaceBtwSections),
                 ],
               ),
             ),
@@ -63,11 +65,27 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: DSizes.spaceBtwSections),
 
                   ///Headings
-                  DSectionHeading(title: 'Popular Products', onPressed: () => Get.to(() => const AllProductsScreen())),
+                  DSectionHeading(
+                      title: 'Popular Products',
+                      onPressed: () => Get.to(() => const AllProductsScreen())),
                   const SizedBox(height: DSizes.spaceBtwItems),
 
                   /// Popular Products
-                  DGridLayout(itemCount: 2, itemBuilder: (_, index) => const DProductCardVertical())
+                  Obx(() {
+                    if (controller.isLoading.value)
+                      return DVerticalProductShimmer();
+
+                    if (controller.featuredProducts.isEmpty) {
+                      return Center(
+                          child: Text('No Data Found',
+                              style: Theme.of(context).textTheme.bodyMedium));
+                    }
+                    return DGridLayout(
+                      itemCount: controller.featuredProducts.length,
+                      itemBuilder: (_, index) => DProductCardVertical(
+                          product: controller.featuredProducts[index]),
+                    );
+                  })
                 ],
               ),
             ),

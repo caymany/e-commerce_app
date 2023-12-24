@@ -37,7 +37,7 @@ class DCircularImage extends StatelessWidget {
             (DHelperFunctions.isDarkMode(context)
                 ? DColors.black
                 : DColors.white),
-        borderRadius: BorderRadius.circular(100),
+        borderRadius: BorderRadius.circular(50),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
