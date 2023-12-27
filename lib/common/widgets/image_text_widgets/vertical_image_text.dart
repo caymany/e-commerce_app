@@ -34,11 +34,10 @@ class DVerticalImageText extends StatelessWidget {
 
             DCircularImage(
               image: image,
-              fit: BoxFit.fitHeight,
-              padding: DSizes.sm * 1.4,
+              fit: BoxFit.fitWidth,
+              padding: DSizes.sm,
               isNetworkImage: isNetworkImage,
               backgroundColor: backgroundColor,
-              overlayColor: DHelperFunctions.isDarkMode(context) ? DColors.light : DColors.dark,
             ),
             const SizedBox(height: DSizes.spaceBtwItems / 2),
 

@@ -7,6 +7,7 @@ import 'package:devhub_kenya/features/shop/screens/product_details/widgets/produ
 import 'package:devhub_kenya/features/shop/screens/product_details/widgets/rating_share.dart';
 import 'package:devhub_kenya/features/shop/screens/product_reviews/product_reviews.dart';
 import 'package:devhub_kenya/utils/constants/colors.dart';
+import 'package:devhub_kenya/utils/constants/enums.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
 import 'package:devhub_kenya/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -42,10 +43,12 @@ class ProductDetail extends StatelessWidget {
                   const DRatingAndShare(),
 
                   /// Price, title,stock,brand
-                  const DProductMetaData(),
+                  DProductMetaData(product: product),
 
                   /// Attributes
-                  const DProductAttributes(),
+                  if(product.productType == ProductType.variable.toString())
+                  DProductAttributes(product:product),
+                  if(product.productType == ProductType.variable.toString())
                   const SizedBox(height: DSizes.spaceBtwSections),
 
                   /// Checkout Button
@@ -59,8 +62,8 @@ class ProductDetail extends StatelessWidget {
                   const DSectionHeading(
                       title: 'Description', showActionButton: false),
                   const SizedBox(height: DSizes.spaceBtwItems),
-                const ReadMoreText(
-                  'This is just a test Product. There are no specific details because this is just the UI design and we are going to include it in the back-end section',
+                ReadMoreText(
+                  product.description ?? '',
                   trimLines: 2,
                   colorClickableText: Colors.pink,
                   trimMode: TrimMode.Line,
