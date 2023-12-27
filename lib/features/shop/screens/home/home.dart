@@ -3,7 +3,7 @@ import 'package:devhub_kenya/common/widgets/custom_shapes/containers/search_cont
 import 'package:devhub_kenya/common/widgets/layout/grid_layout.dart';
 import 'package:devhub_kenya/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:devhub_kenya/common/widgets/texts/section_heading.dart';
-import 'package:devhub_kenya/features/shop/controllers/product_controller.dart';
+import 'package:devhub_kenya/features/shop/controllers/product/product_controller.dart';
 import 'package:devhub_kenya/features/shop/screens/all_products/all_products.dart';
 import 'package:devhub_kenya/features/shop/screens/home/widgets/home_catgories.dart';
 import 'package:devhub_kenya/features/shop/screens/home/widgets/promo_slider.dart';

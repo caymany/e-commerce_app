@@ -5,10 +5,10 @@ class BrandModel {
   String name;
   String image;
   bool? isFeatured;
-  int? productsCount;
+  int? productCount;
 
   BrandModel(
-      {required this.id, required this.image, required this.name, this.isFeatured, this.productsCount});
+      {required this.id, required this.image, required this.name, this.isFeatured, this.productCount});
 
   /// Empty Helper Function
   static BrandModel empty() => BrandModel(id: '', image: '', name: '');
@@ -19,7 +19,7 @@ class BrandModel {
       'Id': id,
       'Name': name,
       'Image': image,
-      'ProductsCount': productsCount,
+      'ProductCount': productCount,
       'IsFeatured': isFeatured,
     };
   }
@@ -32,6 +32,8 @@ class BrandModel {
       id: data['Id'] ?? '',
       name: data['Name'] ?? '',
       image: data['Image'] ?? '',
+      productCount: data['ProductCount'] ?? 0,
+      isFeatured: data['IsFeatured'] ?? false,
     );
   }
 

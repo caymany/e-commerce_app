@@ -31,11 +31,11 @@ class DProductAttributes extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const DProductTitleText(
-                          title: 'Price: ', smallSize: true),
-                      const SizedBox(width: DSizes.spaceBtwItems),
                       Row(
                         children: [
+                          const DProductTitleText(
+                              title: 'Price: ', smallSize: true),
+                          const SizedBox(width: DSizes.spaceBtwItems),
                           Text(
                             'Ksh 16,000',
                             style: Theme.of(context)
@@ -83,9 +83,12 @@ class DProductAttributes extends StatelessWidget {
             Wrap(
               spacing: 8,
               children: [
-                DChoiceChip(text: 'Green', selected: true, onSelected: (value){}),
-                DChoiceChip(text: 'Blue', selected: false, onSelected: (value){}),
-                DChoiceChip(text: 'Pink', selected: false, onSelected: (value){}),
+                DChoiceChip(
+                    text: 'Green', selected: false, onSelected: (value) {}),
+                DChoiceChip(
+                    text: 'Blue', selected: true, onSelected: (value) {}),
+                DChoiceChip(
+                    text: 'Pink', selected: false, onSelected: (value) {}),
               ],
             )
           ],
@@ -94,14 +97,39 @@ class DProductAttributes extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const DSectionHeading(title: 'Size', showActionButton: false),
+            const DSectionHeading(title: 'RAM', showActionButton: false),
             const SizedBox(height: DSizes.spaceBtwItems / 2),
             Wrap(
               spacing: 8,
               children: [
-                DChoiceChip(text: 'Core 5', selected: true, onSelected: (value){}),
-                DChoiceChip(text: 'Core 75', selected: false, onSelected: (value){}),
-                DChoiceChip(text: 'Core i9', selected: false, onSelected: (value){}),
+                ChoiceChip(
+                    label: Text(
+                      '4 GB',
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelMedium!
+                          .apply(color: Colors.grey),
+                    ),
+                    selected: false,
+                    onSelected: (value) {}),ChoiceChip(
+                    label: Text(
+                      '8 GB',
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelMedium!
+                          .apply(color: Colors.white),
+                    ),
+                    selected: true,
+                    onSelected: (value) {}),ChoiceChip(
+                    label: Text(
+                      '16 GB',
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelMedium!
+                          .apply(color: Colors.grey),
+                    ),
+                    selected: false,
+                    onSelected: (value) {}),
               ],
             )
           ],
@@ -110,5 +138,3 @@ class DProductAttributes extends StatelessWidget {
     );
   }
 }
-
-

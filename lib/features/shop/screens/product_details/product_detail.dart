@@ -28,7 +28,7 @@ class ProductDetail extends StatelessWidget {
         child: Column(
           children: [
             /// Product Image slider
-            const DProductImageSlider(),
+             DProductImageSlider(product: product),
 
             /// Product Details
             Padding(

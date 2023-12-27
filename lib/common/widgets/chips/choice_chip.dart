@@ -19,19 +19,16 @@ class DChoiceChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isColor = DHelperFunctions.getColor(text) != null;
-    return Theme(
-      data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
-      child: ChoiceChip(
+    return ChoiceChip(
         label: isColor? const SizedBox(): Text(text),
         selected: selected,
         onSelected: onSelected,
         labelStyle: TextStyle(color: selected ? DColors.white : null),
-        avatar: isColor? DCircularContainer(width: 40,height: 40,backgroundColor: DHelperFunctions.getColor(text)!) : null,
-        labelPadding: isColor  ? const EdgeInsets.all(0) : null,
+        avatar: isColor ? DCircularContainer(width: 50,height: 50, backgroundColor: DHelperFunctions.getColor(text)!) : null,
+        labelPadding: isColor ? const EdgeInsets.all(0) : null,
         padding: isColor ? const EdgeInsets.all(0) : null,
         shape: isColor  ? const CircleBorder() : null,
-        backgroundColor: isColor ? DHelperFunctions.getColor(text) : null,
-      ),
-    );
+        backgroundColor: isColor ? DHelperFunctions.getColor(text)! : null,
+      );
   }
 }
