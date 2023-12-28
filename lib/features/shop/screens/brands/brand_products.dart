@@ -20,7 +20,7 @@ class BrandProducts extends StatelessWidget {
               DBrandCard(showBorder: true),
               SizedBox(height: DSizes.spaceBtwSections),
 
-              DSortableProducts(),
+              DSortableProducts(products: []),
             ],
           ),
         ),

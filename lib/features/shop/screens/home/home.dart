@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devhub_kenya/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:devhub_kenya/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:devhub_kenya/common/widgets/layout/grid_layout.dart';
@@ -67,7 +68,10 @@ class HomeScreen extends StatelessWidget {
                   ///Headings
                   DSectionHeading(
                       title: 'Popular Products',
-                      onPressed: () => Get.to(() => const AllProductsScreen())),
+                      onPressed: () => Get.to(() => AllProductsScreen(
+                            title: 'Popular Products',
+                        futureMethod: controller.fetchAllFeaturedProducts(),
+                          ))),
                   const SizedBox(height: DSizes.spaceBtwItems),
 
                   /// Popular Products

@@ -32,6 +32,44 @@ class ProductRepository extends GetxController {
     }
   }
 
+  /// All Featured
+  Future<List<ProductModel>> getAllFeaturedProducts() async {
+    try{
+      final snapshot = await _db.collection('Products').where('IsFeatured', isEqualTo: true).get();
+      return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+    } on FirebaseAuthException catch (e) {
+      throw DFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw DFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const DFormatException();
+    } on PlatformException catch (e) {
+      throw DPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+
+  ///
+  Future<List<ProductModel>> fetchProductsByQuery(query) async {
+    try{
+      final querySnapshot = await query.get();
+      final List<ProductModel> productList = querySnapshot.docs.map((doc) => ProductModel.fromQuerySnapshot(doc)).toList();
+      return productList;
+    } on FirebaseAuthException catch (e) {
+      throw DFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw DFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const DFormatException();
+    } on PlatformException catch (e) {
+      throw DPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
 
 
 
