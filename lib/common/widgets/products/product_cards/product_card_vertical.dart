@@ -56,6 +56,7 @@ class DProductCardVertical extends StatelessWidget {
                   ),
 
                   ///Sale Tag
+                  if (salePercentage != null)
                   Positioned(
                     top: 12,
                     child: DRoundedContainer(

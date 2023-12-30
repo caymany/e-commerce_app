@@ -1,5 +1,6 @@
 import 'package:devhub_kenya/common/widgets/brands/brand_card.dart';
 import 'package:devhub_kenya/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:devhub_kenya/features/shop/models/brand_model.dart';
 import 'package:devhub_kenya/utils/constants/colors.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
 import 'package:devhub_kenya/utils/helpers/helper_functions.dart';
@@ -22,7 +23,7 @@ class DBrandShowCase extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: DSizes.spaceBtwItems),
       child: Column(
         children: [
-          const DBrandCard(showBorder: false),
+          DBrandCard(showBorder: false, brand: BrandModel.empty()),
           const SizedBox(height: DSizes.spaceBtwItems),
 
           /// Brand Images

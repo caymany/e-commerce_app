@@ -1,6 +1,7 @@
 import 'package:devhub_kenya/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:devhub_kenya/common/widgets/images/d_circular_images.dart';
 import 'package:devhub_kenya/common/widgets/texts/brand_title_text_with_verified_icon.dart';
+import 'package:devhub_kenya/features/shop/models/brand_model.dart';
 import 'package:devhub_kenya/utils/constants/colors.dart';
 import 'package:devhub_kenya/utils/constants/enums.dart';
 import 'package:devhub_kenya/utils/constants/image_strings.dart';
@@ -12,9 +13,10 @@ class DBrandCard extends StatelessWidget {
   const DBrandCard({
     super.key,
     required this.showBorder,
-    this.onTap,
+    this.onTap, required this.brand,
   });
 
+  final BrandModel brand;
   final bool showBorder;
   final void Function()? onTap;
 
@@ -32,12 +34,9 @@ class DBrandCard extends StatelessWidget {
             /// ICon
             Flexible(
               child: DCircularImage(
-                isNetworkImage: false,
-                image: DImages.darkAppLogo,
+                isNetworkImage: true,
+                image: brand.image,
                 backgroundColor: Colors.transparent,
-                overlayColor: DHelperFunctions.isDarkMode(context)
-                    ? DColors.white
-                    : DColors.black,
               ),
             ),
             const SizedBox(width: DSizes.spaceBtwItems),
@@ -48,9 +47,9 @@ class DBrandCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const DBrandTitleWithVerifiedIcon(
-                      title: 'Canon', brandTextSizes: TextSizes.large),
-                  Text('255',
+                  DBrandTitleWithVerifiedIcon(
+                      title: brand.name, brandTextSizes: TextSizes.large),
+                  Text('${brand.productCount ?? 0} products',
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.labelMedium),
                 ],

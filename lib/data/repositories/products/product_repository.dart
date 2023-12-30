@@ -16,8 +16,12 @@ class ProductRepository extends GetxController {
 
   /// Get some Featured
   Future<List<ProductModel>> getFeaturedProducts() async {
-    try{
-      final snapshot = await _db.collection('Products').where('IsFeatured', isEqualTo: true).limit(4).get();
+    try {
+      final snapshot = await _db
+          .collection('Products')
+          .where('IsFeatured', isEqualTo: true)
+          .limit(4)
+          .get();
       return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
     } on FirebaseAuthException catch (e) {
       throw DFirebaseAuthException(e.code).message;
@@ -34,8 +38,11 @@ class ProductRepository extends GetxController {
 
   /// All Featured
   Future<List<ProductModel>> getAllFeaturedProducts() async {
-    try{
-      final snapshot = await _db.collection('Products').where('IsFeatured', isEqualTo: true).get();
+    try {
+      final snapshot = await _db
+          .collection('Products')
+          .where('IsFeatured', isEqualTo: true)
+          .get();
       return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
     } on FirebaseAuthException catch (e) {
       throw DFirebaseAuthException(e.code).message;
@@ -50,12 +57,13 @@ class ProductRepository extends GetxController {
     }
   }
 
-
   ///
   Future<List<ProductModel>> fetchProductsByQuery(query) async {
-    try{
+    try {
       final querySnapshot = await query.get();
-      final List<ProductModel> productList = querySnapshot.docs.map((doc) => ProductModel.fromQuerySnapshot(doc)).toList();
+      final List<ProductModel> productList = querySnapshot.docs
+          .map((doc) => ProductModel.fromQuerySnapshot(doc))
+          .toList();
       return productList;
     } on FirebaseAuthException catch (e) {
       throw DFirebaseAuthException(e.code).message;
@@ -70,7 +78,28 @@ class ProductRepository extends GetxController {
     }
   }
 
-
-
-
+  /// Get Products From Specific Brand
+  Future<List<ProductModel>> getProductsForBrand(
+      {required String brandId, int limit = -1}) async {
+    try {
+      final querySnapshot = limit == -1
+          ? await _db
+              .collection('Products')
+              .where('Brand.Id', isEqualTo: brandId)
+              .get()
+          : await _db
+              .collection('Products')
+              .where('Brand.Id', isEqualTo: brandId)
+              .limit(limit)
+              .get();
+      final products = querySnapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+      return products;
+    } on FirebaseException catch (e) {
+      throw DFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw DPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something Went Wrong. Please try again';
+    }
+  }
 }
