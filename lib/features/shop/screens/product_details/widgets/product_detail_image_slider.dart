@@ -36,7 +36,7 @@ class DProductImageSlider extends StatelessWidget {
             SizedBox(
               height: 400,
               child: Padding(
-                padding: EdgeInsets.all(DSizes.productImageRadius * 2),
+                padding: const EdgeInsets.all(DSizes.productImageRadius * 2),
                 child: Center(child: Obx(() {
                   final image = controller.selectedProductImage.value;
                   return GestureDetector(

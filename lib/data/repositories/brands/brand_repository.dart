@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:devhub_kenya/features/shop/models/brand_category_model.dart';
 import 'package:devhub_kenya/features/shop/models/brand_model.dart';
 import 'package:devhub_kenya/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:devhub_kenya/utils/exceptions/firebase_exceptions.dart';
@@ -16,12 +17,13 @@ class BrandRepository extends GetxController {
 
   ///  Get all Categories
   Future<List<BrandModel>> getAllBrands() async {
-    try{
+    try {
       final snapshot = await _db.collection('Brands').get();
-      final result = snapshot.docs.map((e) => BrandModel.fromSnapshot(e)).toList();
+      final result =
+          snapshot.docs.map((e) => BrandModel.fromSnapshot(e)).toList();
       return result;
     } on FirebaseAuthException catch (e) {
-      throw DFirebaseAuthException(e.code).message;
+       throw DFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw DFirebaseException(e.code).message;
     } on FormatException catch (_) {
@@ -34,4 +36,9 @@ class BrandRepository extends GetxController {
   }
 
   /// Get Brands for categories
+  Future<List<BrandModel>> getBrandsForCategory() async {
+    final data = await _db.collection('Category  Brands').get();
+    final snap = data.docs.map((e) => BrandCategoryModel.fromSnapshot(e)).toList();
+    return snap;
+  }
 }

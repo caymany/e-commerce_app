@@ -69,8 +69,8 @@ class ProductDetail extends StatelessWidget {
                   trimMode: TrimMode.Line,
                   trimCollapsedText: '.....Show more',
                   trimExpandedText: '.......Show less',
-                  moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,color: DColors.primary),
-                  lessStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,color: DColors.primary),
+                  moreStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold,color: DColors.primary),
+                  lessStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold,color: DColors.primary),
                 ),
 
 

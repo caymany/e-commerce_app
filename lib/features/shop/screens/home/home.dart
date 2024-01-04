@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devhub_kenya/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:devhub_kenya/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:devhub_kenya/common/widgets/layout/grid_layout.dart';
@@ -76,8 +75,7 @@ class HomeScreen extends StatelessWidget {
 
                   /// Popular Products
                   Obx(() {
-                    if (controller.isLoading.value)
-                      return DVerticalProductShimmer();
+                    if (controller.isLoading.value)  return const DVerticalProductShimmer();
 
                     if (controller.featuredProducts.isEmpty) {
                       return Center(

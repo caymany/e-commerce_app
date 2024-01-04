@@ -21,6 +21,11 @@ class ImagesController extends GetxController {
     // Assign Thumbnail as Selected Image
     selectedProductImage.value = product.thumbnail;
 
+    // Get All Images from the Product Model if not null
+    if(product.images != null) {
+      images.addAll(product.images!);
+    }
+
     // Get all Images from Variations if not null
     if (product.productVariations != null ||
         product.productVariations!.isNotEmpty) {

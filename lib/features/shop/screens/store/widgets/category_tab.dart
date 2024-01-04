@@ -4,6 +4,7 @@ import 'package:devhub_kenya/common/widgets/products/product_cards/product_card_
 import 'package:devhub_kenya/common/widgets/texts/section_heading.dart';
 import 'package:devhub_kenya/features/shop/models/category_model.dart';
 import 'package:devhub_kenya/features/shop/models/product_model.dart';
+import 'package:devhub_kenya/features/shop/screens/store/widgets/category_brands.dart';
 import 'package:devhub_kenya/utils/constants/image_strings.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class DCategoryTab extends StatelessWidget {
         child: Column(
           children: [
             /// Brands
-            const DBrandShowCase(images: [DImages.canonPrixma, DImages.canonG3420, DImages.hpMf24]),
+            CategoryBrands(category: category),
             const SizedBox(height: DSizes.spaceBtwItems),
             /// Products
             DSectionHeading(title: 'You might like', showActionButton: true,onPressed: (){}),
