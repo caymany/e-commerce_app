@@ -28,7 +28,7 @@ class BrandProducts extends StatelessWidget {
               const SizedBox(height: DSizes.spaceBtwSections),
 
               FutureBuilder(
-                future: controller.getBrandProducts(brand.id),
+                future: controller.getBrandProducts(brandId: brand.id),
                 builder: (context, snapshot) {
                   /// Handle Loader, No record or error Message
                   const loader = DVerticalProductShimmer();

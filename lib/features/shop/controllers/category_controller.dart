@@ -1,5 +1,7 @@
 import 'package:devhub_kenya/data/repositories/categories/category_repository.dart';
+import 'package:devhub_kenya/data/repositories/products/product_repository.dart';
 import 'package:devhub_kenya/features/shop/models/category_model.dart';
+import 'package:devhub_kenya/features/shop/models/product_model.dart';
 import 'package:devhub_kenya/utils/popups/loaders.dart';
 import 'package:get/get.dart';
 
@@ -39,4 +41,9 @@ class CategoryController extends GetxController {
   ///  --- Load Selected category data
 
   ///  Get category or Sub category products
+  Future<List<ProductModel>> getCategoryProducts({required String categoryId, int limit = 4}) async {
+    // Fetch Limited 4 products against each sub category
+    final products = await ProductRepository.instance.getProductsForCategory(categoryId: categoryId, limit: limit);
+    return products;
+  }
 }

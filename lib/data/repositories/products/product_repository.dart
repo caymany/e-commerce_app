@@ -92,7 +92,49 @@ class ProductRepository extends GetxController {
               .where('Brand.Id', isEqualTo: brandId)
               .limit(limit)
               .get();
-      final products = querySnapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+      final products = querySnapshot.docs
+          .map((doc) => ProductModel.fromSnapshot(doc))
+          .toList();
+      return products;
+    } on FirebaseException catch (e) {
+      throw DFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw DPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something Went Wrong. Please try again';
+    }
+  }
+
+  /// Products for Category
+  Future<List<ProductModel>> getProductsForCategory(
+      {required String categoryId, int limit = 4}) async {
+    try {
+      QuerySnapshot productCategoryQuery = limit == -1
+          ? await _db
+              .collection('ProductCategory')
+              .where('categoryId', isEqualTo: categoryId)
+              .get()
+          : await _db
+              .collection('ProductCategory')
+              .where('categoryId', isEqualTo: categoryId)
+              .limit(limit)
+              .get();
+
+      // Extract  Product Ids from the documents
+      List<String> productIds = productCategoryQuery.docs
+          .map((doc) => doc['productId'] as String)
+          .toList();
+
+      // Query to get all docs where brandId id in  the list of brand Ids Fieldpath
+      final productsQuery = await _db
+          .collection('Products')
+          .where(FieldPath.documentId, whereIn: productIds)
+          .get();
+
+      // Extract brand names or other relevant data
+      List<ProductModel> products = productsQuery.docs
+          .map((doc) => ProductModel.fromSnapshot(doc))
+          .toList();
       return products;
     } on FirebaseException catch (e) {
       throw DFirebaseException(e.code).message;

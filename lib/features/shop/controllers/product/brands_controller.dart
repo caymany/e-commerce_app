@@ -1,5 +1,6 @@
 import 'package:devhub_kenya/data/repositories/brands/brand_repository.dart';
 import 'package:devhub_kenya/data/repositories/products/product_repository.dart';
+import 'package:devhub_kenya/features/shop/models/brand_category_model.dart';
 import 'package:devhub_kenya/features/shop/models/brand_model.dart';
 import 'package:devhub_kenya/features/shop/models/product_model.dart';
 import 'package:devhub_kenya/utils/popups/loaders.dart';
@@ -51,9 +52,9 @@ class BrandController extends GetxController {
   }
 
   /// Get Brand Specific Products form data source
- Future<List<ProductModel>> getBrandProducts(String brandId) async {
+ Future<List<ProductModel>> getBrandProducts({ required String brandId, int limit = -1}) async {
     try{
-      final products = await ProductRepository.instance.getProductsForBrand(brandId: brandId);
+      final products = await ProductRepository.instance.getProductsForBrand(brandId: brandId,limit: limit);
       return products;
     } catch (e) {
       DLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
