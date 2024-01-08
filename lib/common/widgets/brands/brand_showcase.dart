@@ -35,7 +35,7 @@ class DBrandShowCase extends StatelessWidget {
           children: [
             DBrandCard(showBorder: false, brand: brand),
             const SizedBox(height: DSizes.spaceBtwItems),
-
+ 
             /// Brand Images
             Row(
               children: images

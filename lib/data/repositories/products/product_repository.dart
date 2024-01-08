@@ -125,7 +125,7 @@ class ProductRepository extends GetxController {
           .map((doc) => doc['productId'] as String)
           .toList();
 
-      // Query to get all docs where brandId id in  the list of brand Ids Fieldpath
+      // Query to get all docs where brandId id in  the list of brand Ids FieldPath
       final productsQuery = await _db
           .collection('Products')
           .where(FieldPath.documentId, whereIn: productIds)
