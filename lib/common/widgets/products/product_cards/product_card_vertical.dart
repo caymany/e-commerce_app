@@ -1,6 +1,7 @@
 import 'package:devhub_kenya/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:devhub_kenya/common/widgets/icons/d_circular_icon.dart';
 import 'package:devhub_kenya/common/widgets/images/d_rounded_images.dart';
+import 'package:devhub_kenya/common/widgets/products/favorite_icon/favorite_icon.dart';
 import 'package:devhub_kenya/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:devhub_kenya/common/widgets/texts/product_price_text.dart';
 import 'package:devhub_kenya/common/widgets/texts/product_title_text.dart';
@@ -76,8 +77,7 @@ class DProductCardVertical extends StatelessWidget {
                   const Positioned(
                     top: 0,
                     right: 0,
-                    child:
-                        DCircularIcon(icon: Iconsax.heart5, color: Colors.red),
+                    child:DFavouriteICon(),
                   ),
                 ],
               ),
