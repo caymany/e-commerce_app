@@ -7,6 +7,7 @@ import 'package:devhub_kenya/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:devhub_kenya/utils/exceptions/firebase_exceptions.dart';
 import 'package:devhub_kenya/utils/exceptions/format_exceptions.dart';
 import 'package:devhub_kenya/utils/exceptions/platform_exceptions.dart';
+import 'package:devhub_kenya/utils/local_storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -37,6 +38,10 @@ class AuthenticationRepository extends GetxController {
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified) {
+        // Initialize User Specific Storage
+        await DLocalStorage.init(user.uid);
+
+        // If user email is verified, redirect to navigation menu
         Get.offAll(() => const NavigationMenu());
       } else {
         Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));

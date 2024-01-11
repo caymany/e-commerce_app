@@ -57,7 +57,7 @@ class ProductRepository extends GetxController {
     }
   }
 
-  ///
+  /// Get Products By Query
   Future<List<ProductModel>> fetchProductsByQuery(query) async {
     try {
       final querySnapshot = await query.get();
@@ -75,6 +75,30 @@ class ProductRepository extends GetxController {
       throw DPlatformException(e.code).message;
     } catch (e) {
       throw 'Something went wrong. Please try again';
+    }
+  }
+
+  /// Favorite Products
+  Future<List<ProductModel>> getFavouriteProducts(
+      List<String> productIds) async {
+    try {
+      final snapshot = await _db
+          .collection('Products')
+          .where(FieldPath.documentId, whereIn: productIds)
+          .get();
+      return snapshot.docs
+          .map((querySnapshot) => ProductModel.fromSnapshot(querySnapshot))
+          .toList();
+    } on FirebaseAuthException catch (e) {
+      throw DFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw DFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const DFormatException();
+    } on PlatformException catch (e) {
+      throw DPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please  try again';
     }
   }
 

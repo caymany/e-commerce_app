@@ -1,15 +1,23 @@
 import 'package:get_storage/get_storage.dart';
 
 class DLocalStorage {
-  static final DLocalStorage _instance = DLocalStorage._internal();
 
-  factory DLocalStorage() {
-    return _instance;
-  }
+  late final GetStorage _storage;
 
   DLocalStorage._internal();
 
-  final _storage = GetStorage();
+  static DLocalStorage? _instance;
+
+  factory DLocalStorage.instance() {
+    _instance ??= DLocalStorage._internal();
+    return _instance!;
+  }
+
+  static Future<void> init(String bucketName) async {
+    await GetStorage.init(bucketName);
+    _instance = DLocalStorage._internal();
+    _instance!._storage = GetStorage(bucketName);
+  }
 
   // Generic method to save data
 
