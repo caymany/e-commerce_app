@@ -25,6 +25,7 @@ class DImages {
   static const String successAnimation = "assets/images/animations/Success_anim.gif";
   static const String docerAnim = "assets/images/animations/docer_animation.gif";
   static const String newDocerAnim = "assets/images/animations/Teal Docer Animation.json";
+  static const String emptyCart = "assets/images/animations/sammy-grocery-cart-1.gif";
 
   //  Category Icons
 

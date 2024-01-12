@@ -74,10 +74,10 @@ class DProductCardVertical extends StatelessWidget {
                   ),
 
                   /// Favorite Icon
-                  const Positioned(
+                  Positioned(
                     top: 0,
                     right: 0,
-                    child:DFavouriteICon(),
+                    child:DFavouriteIcon(productId: product.id),
                   ),
                 ],
               ),

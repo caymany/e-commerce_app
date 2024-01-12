@@ -6,12 +6,17 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 
-class DFavouriteICon extends StatelessWidget {
-  const DFavouriteICon({super.key});
+class DFavouriteIcon extends StatelessWidget {
+  const DFavouriteIcon({super.key, required this.productId});
+
+  final String productId;
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(FavouritesController());
-    return const DCircularIcon(icon: Iconsax.heart5, color: Colors.red);
+    return Obx(() => DCircularIcon(
+      onPressed:() => controller.toggleFavoriteProduct(productId),
+        icon: controller.isFavorite(productId) ? Iconsax.heart5 : Iconsax.heart,
+        color: controller.isFavorite(productId) ? Colors.red : null));
   }
 }

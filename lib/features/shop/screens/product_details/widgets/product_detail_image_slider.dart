@@ -83,10 +83,10 @@ class DProductImageSlider extends StatelessWidget {
                 ),
               ),
             ),
-            const DAppBar(
+            DAppBar(
               showBackArrow: true,
               actions: [
-                DFavouriteICon(),
+                DFavouriteIcon(productId: product.id),
               ],
             )
           ],
