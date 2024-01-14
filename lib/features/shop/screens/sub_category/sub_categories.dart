@@ -38,7 +38,7 @@ class SubCategoriesScreen extends StatelessWidget {
                     itemCount: 4,
                     scrollDirection: Axis.horizontal,
                     separatorBuilder: (context, index) => const SizedBox(width: DSizes.spaceBtwItems),
-                      itemBuilder: (context, index) => const DProductCardHorizontal(),
+                      itemBuilder: (context, index) => DProductCardHorizontal(product: product),
                   ),
                 ),
 

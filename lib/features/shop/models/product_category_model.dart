@@ -18,5 +18,5 @@ class ProductCategoryModel {
     return ProductCategoryModel(
         categoryId: data['categoryId'] as String,
         productId: data['productId'] as String);
-  }x  
+  }
 }
