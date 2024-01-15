@@ -31,7 +31,7 @@ class DHomeCategories extends StatelessWidget {
               return DVerticalImageText(
                 image: category.image,
                 title: category.name,
-                onTap: () => Get.to(() => const SubCategoriesScreen()),
+                onTap: () => Get.to(() => const SubCategoriesScreen(category: category)),
               );
             },
           ),
