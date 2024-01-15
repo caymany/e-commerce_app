@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:devhub_kenya/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:devhub_kenya/common/widgets/icons/d_circular_icon.dart';
 import 'package:devhub_kenya/common/widgets/images/d_rounded_images.dart';
@@ -5,8 +7,10 @@ import 'package:devhub_kenya/common/widgets/products/favorite_icon/favorite_icon
 import 'package:devhub_kenya/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:devhub_kenya/common/widgets/texts/product_price_text.dart';
 import 'package:devhub_kenya/common/widgets/texts/product_title_text.dart';
+import 'package:devhub_kenya/features/shop/controllers/product/product_controller.dart';
 import 'package:devhub_kenya/features/shop/models/product_model.dart';
 import 'package:devhub_kenya/utils/constants/colors.dart';
+import 'package:devhub_kenya/utils/constants/enums.dart';
 import 'package:devhub_kenya/utils/constants/image_strings.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
 import 'package:devhub_kenya/utils/helpers/helper_functions.dart';
@@ -20,6 +24,9 @@ class DProductCardHorizontal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    final salePercentage =
+    controller.calculateSalePercentage(product.price, product.salePrice);
     final dark = DHelperFunctions.isDarkMode(context);
     return Container(
       width: 310,
@@ -37,14 +44,15 @@ class DProductCardHorizontal extends StatelessWidget {
             backgroundColor: dark ? DColors.dark : DColors.light,
             child: Stack(
               children: [
-                const SizedBox(
+                SizedBox(
                   width: 120,
                   height: 120,
                   child: DRoundedImage(
-                      imageUrl: DImages.canonG3420, applyImageRadius: true),
+                      imageUrl: product.thumbnail, applyImageRadius: true, isNetworkImage: true),
                 ),
 
                 /// Sale Tag
+                if (salePercentage != null)
                 Positioned(
                   top: 12,
                   child: DRoundedContainer(
@@ -52,7 +60,7 @@ class DProductCardHorizontal extends StatelessWidget {
                     backgroundColor: DColors.secondary.withOpacity(0.8),
                     padding: const EdgeInsets.symmetric(
                         horizontal: DSizes.sm, vertical: DSizes.xs),
-                    child: Text('25%',
+                    child: Text('$salePercentage',
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge!
@@ -77,21 +85,46 @@ class DProductCardHorizontal extends StatelessWidget {
              padding: const EdgeInsets.only(top: DSizes.sm, left: DSizes.sm),
              child: Column(
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      DProductTitleText(title: 'Canon Printer', smallSize: true),
-                      SizedBox(height: DSizes.spaceBtwItems / 2),
-                      DBrandTitleWithVerifiedIcon(title: 'canon')
+                      DProductTitleText(title: product.title, smallSize: true),
+                      const SizedBox(height: DSizes.spaceBtwItems / 2),
+                      DBrandTitleWithVerifiedIcon(title: product.brand!.name)
                     ],
                   ),
 
                  const Spacer(),
 
-                 Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Flexible(child: DProductPriceText(price: '6,500')),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            if (product.productType ==
+                                ProductType.single.toString() &&
+                                product.salePrice > 0)
+                              Padding(
+                                padding: EdgeInsets.only(left: DSizes.sm),
+                                child: Text(
+                                  product.price.toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .apply(decoration: TextDecoration.lineThrough),
+                                ),
+                              ),
+
+                            ///Show sale price as main price is sale exist
+                            Padding(
+                              padding: EdgeInsets.only(left: DSizes.sm),
+                              child: DProductPriceText(
+                                  price: controller.getProductPrice(product)),
+                            ),
+                          ],
+                        ),
+                      ),
 
                       ///Add to cart
                       Container(
@@ -99,14 +132,14 @@ class DProductCardHorizontal extends StatelessWidget {
                             color: DColors.dark,
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(DSizes.cardRadiusMd),
-                              bottomRight:
-                              Radius.circular(DSizes.productImageRadius),
+                              bottomRight: Radius.circular(DSizes.productImageRadius),
                             )),
                         child: const SizedBox(
                             width: DSizes.iconLg * 1.2,
                             height: DSizes.iconLg * 1.2,
-                            child: Center(child: Icon(Iconsax.add, color: DColors.white))),
-                      )
+                            child: Center(
+                                child: Icon(Iconsax.add, color: DColors.white))),
+                      ),
                     ],
                   )
                 ],
