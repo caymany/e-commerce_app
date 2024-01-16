@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:devhub_kenya/common/widgets/brands/brand_showcase.dart';
 import 'package:devhub_kenya/features/shop/controllers/product/brands_controller.dart';
@@ -47,7 +46,7 @@ class CategoryBrands extends StatelessWidget {
                   future:
                       controller.getBrandProducts(brandId: brand.id, limit: 3),
                   builder: (context, snapshot) {
-                    // Handle lOader
+                    // Handle loader
                     final widget = DCloudHelperFunctions.checkMultiRecordState(
                         snapshot: snapshot, loader: loader);
                     if (widget != null) return widget;

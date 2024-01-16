@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:devhub_kenya/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:devhub_kenya/common/widgets/icons/d_circular_icon.dart';
 import 'package:devhub_kenya/common/widgets/images/d_rounded_images.dart';

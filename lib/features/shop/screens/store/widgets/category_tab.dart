@@ -12,6 +12,8 @@ import 'package:devhub_kenya/utils/constants/sizes.dart';
 import 'package:devhub_kenya/utils/helpers/cloud_helper_function.dart';
 import 'package:devhub_kenya/utils/shimmers/vertical_product_shimmer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class DCategoryTab extends StatelessWidget {
   const DCategoryTab({super.key, required this.category});
@@ -53,8 +55,8 @@ class DCategoryTab extends StatelessWidget {
                         DSectionHeading(
                           title: 'You might like',
                           showActionButton: true,
-                          onPressed: () => AllProductsScreen(title: category.name,
-                          futureMethod: controller.getCategoryProducts(categoryId: category.id, limit: -1)),
+                          onPressed: () => Get.to(AllProductsScreen(title: category.name,
+                          futureMethod: controller.getCategoryProducts(categoryId: category.id, limit: -1))),
                         ),
                         const SizedBox(height: DSizes.spaceBtwItems),
                         DGridLayout(

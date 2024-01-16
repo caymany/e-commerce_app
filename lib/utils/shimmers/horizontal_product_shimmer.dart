@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:devhub_kenya/common/widgets/layout/grid_layout.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
 import 'package:devhub_kenya/utils/popups/shimmer_loader.dart';

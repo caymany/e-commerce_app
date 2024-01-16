@@ -38,7 +38,7 @@ class FavoriteScreen extends StatelessWidget {
                 /// Nothing found widget
                 final emptyWidget = DAnimationLoaderWidget(
                   text: 'Whoops! Wishlist is Empty...',
-                  animation: DImages.emptyCart,
+                  animation: DImages.emptyWishlist,
                   showAction: true,
                   actionText: 'Let\'s add some',
                   onActionPressed: () => Get.off(() => const NavigationMenu()),

@@ -24,7 +24,7 @@ class AllProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(AllProductsController());
     return Scaffold(
-      appBar: const DAppBar(title: Text('All Products'), showBackArrow: true),
+      appBar: DAppBar(title: Text(title), showBackArrow: true),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(DSizes.defaultSpace),

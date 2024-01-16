@@ -40,12 +40,8 @@ class CategoryRepository extends GetxController {
       final snapshot = await _db.collection('Categories').where('ParentId', isEqualTo: categoryId).get();
       final list = snapshot.docs.map((e) => CategoryModel.fromSnapshot(e)).toList();
       return list;
-    } on FirebaseAuthException catch (e) {
-      throw DFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw DFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const DFormatException();
     } on PlatformException catch (e) {
       throw DPlatformException(e.code).message;
     } catch (e) {
