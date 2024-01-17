@@ -61,7 +61,7 @@ class DBrandShowCase extends StatelessWidget {
           fit: BoxFit.contain,
           imageUrl: image,
           progressIndicatorBuilder: (context, url, downloadProgress) =>
-              const DShimmerEffect(width: 100, height: 100),
+               const DShimmerEffect(width: 100, height: 100),
           errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
       ),
