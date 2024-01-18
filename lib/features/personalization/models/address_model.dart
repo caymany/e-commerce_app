@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devhub_kenya/utils/formatters/formatter.dart';
 import 'package:get/get.dart';
 
@@ -56,27 +57,36 @@ class AddressModel {
   factory AddressModel.fromMap(Map<String, dynamic> data) {
     return AddressModel(
       id: data['Id'] as String,
-      name: data['Name'] ?? '',
-      phoneNumber: data['PhoneNumber'] ?? '',
-      street: data['Street'] ?? '',
-      city: data['City'] ?? '',
-      state: data['State'] ?? '',
-      postalCode: data['PostalCode'] ?? '',
-      country: data['Country'] ?? '',
+      name: data['Name'] as String,
+      phoneNumber: data['PhoneNumber']  as String,
+      street: data['Street']  as String,
+      city: data['City'] as String,
+      state: data['State'] as String,
+      postalCode: data['PostalCode'] as String,
+      country: data['Country'] as String,
+      selectedAddress: data['SelectedAddress'] as bool,
+      dateTime: (data['DateTime'] as Timestamp).toDate(),
     );
   }
 
-  factory AddressModel.fromDocumentSnapshot(Map<String, dynamic> data) {
+  factory AddressModel.fromDocumentSnapshot(DocumentSnapshot snapshot) {
+    final data = snapshot.data() as Map<String, dynamic>;
     return AddressModel(
-      id: id,
-      name: name,
-      phoneNumber: phoneNumber,
-      street: street,
-      city: city,
-      state: state,
-      postalCode: postalCode,
-      country: country,
+      id: snapshot.id,
+      name: data['Name'] ?? '',
+      phoneNumber: data['Name'] ?? '',
+      street: data['Name'] ?? '',
+      city: data['Name'] ?? '',
+      state: data['Name'] ?? '',
+      postalCode: data['Name'] ?? '',
+      country: data['Name'] ?? '',
+      dateTime: (data['DateTime'] as Timestamp).toDate(),
+      selectedAddress: data['SelectedAddress'] as bool,
     );
+  }
+  @override
+  String toString() {
+    return '$street, $city, $postalCode, $country';
   }
 
 }
