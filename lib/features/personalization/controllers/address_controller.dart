@@ -105,7 +105,7 @@ class AddressController extends GetxController {
 
       // Update Selected Address Status
       address.id = id;
-      await selectedAddress(address);
+      await selectAddress(address);
 
       // Remove Loader
       DFullscreenLoader.stopLoading();

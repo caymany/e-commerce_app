@@ -29,15 +29,16 @@ class AddressModel {
 
   String get formattedPhoneNo => DFormatter.formatPhoneNumber(phoneNumber);
 
-  static AddressModel empty() =>
-      AddressModel(name: '',
-          phoneNumber: '',
-          street: '',
-          city: '',
-          state: '',
-          postalCode: '',
-          country: '',
-          id: '');
+  static AddressModel empty() => AddressModel(
+        id: '',
+        name: '',
+        phoneNumber: '',
+        street: '',
+        city: '',
+        state: '',
+        postalCode: '',
+        country: '',
+      );
 
   Map<String, dynamic> toJson() {
     return {
@@ -49,7 +50,7 @@ class AddressModel {
       'State': state,
       'PostalCode': postalCode,
       'Country': country,
-      'DateTime': dateTime,
+      'DateTime': DateTime.now(),
       'SelectedAddress': selectedAddress,
     };
   }
@@ -58,14 +59,14 @@ class AddressModel {
     return AddressModel(
       id: data['Id'] as String,
       name: data['Name'] as String,
-      phoneNumber: data['PhoneNumber']  as String,
-      street: data['Street']  as String,
+      phoneNumber: data['PhoneNumber'] as String,
+      street: data['Street'] as String,
       city: data['City'] as String,
       state: data['State'] as String,
       postalCode: data['PostalCode'] as String,
       country: data['Country'] as String,
-      selectedAddress: data['SelectedAddress'] as bool,
       dateTime: (data['DateTime'] as Timestamp).toDate(),
+      selectedAddress: data['SelectedAddress'] as bool,
     );
   }
 
@@ -74,19 +75,19 @@ class AddressModel {
     return AddressModel(
       id: snapshot.id,
       name: data['Name'] ?? '',
-      phoneNumber: data['Name'] ?? '',
-      street: data['Name'] ?? '',
-      city: data['Name'] ?? '',
-      state: data['Name'] ?? '',
-      postalCode: data['Name'] ?? '',
-      country: data['Name'] ?? '',
+      phoneNumber: data['PhoneNumber'] ?? '',
+      street: data['Street'] ?? '',
+      city: data['City'] ?? '',
+      state: data['State'] ?? '',
+      postalCode: data['PostalCode'] ?? '',
+      country: data['Country'] ?? '',
       dateTime: (data['DateTime'] as Timestamp).toDate(),
       selectedAddress: data['SelectedAddress'] as bool,
     );
   }
+
   @override
   String toString() {
     return '$street, $city, $postalCode, $country';
   }
-
 }

@@ -12,8 +12,7 @@ class AddressRepository extends GetxController {
   Future<List<AddressModel>> fetchUserAddresses() async {
     try {
       final userId = AuthenticationRepository.instance.authUser!.uid;
-      if (userId.isEmpty)
-        throw ' Unable to find user information. Try again later';
+      if (userId.isEmpty) throw ' Unable to find user information. Try again ina few minutes';
 
       final result = await _db
           .collection('Users')
