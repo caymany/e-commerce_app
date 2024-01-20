@@ -41,7 +41,6 @@ class DHomeAppbar extends StatelessWidget {
       ),
       actions: [
         DCartCountericon(
-          onPressed: () {},
           iconColor: DColors.white,
         )
       ],

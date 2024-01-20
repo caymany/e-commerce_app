@@ -7,6 +7,7 @@ import 'package:devhub_kenya/common/widgets/texts/product_price_text.dart';
 import 'package:devhub_kenya/common/widgets/texts/product_title_text.dart';
 import 'package:devhub_kenya/features/shop/controllers/product/product_controller.dart';
 import 'package:devhub_kenya/features/shop/models/product_model.dart';
+import 'package:devhub_kenya/features/shop/screens/cart/widgets/add_to_cart_button.dart';
 import 'package:devhub_kenya/features/shop/screens/product_details/product_detail.dart';
 import 'package:devhub_kenya/utils/constants/colors.dart';
 import 'package:devhub_kenya/utils/constants/enums.dart';
@@ -131,19 +132,8 @@ class DProductCardVertical extends StatelessWidget {
                 ),
 
                 ///Add to cart
-                Container(
-                  decoration: const BoxDecoration(
-                      color: DColors.dark,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(DSizes.cardRadiusMd),
-                        bottomRight: Radius.circular(DSizes.productImageRadius),
-                      )),
-                  child: const SizedBox(
-                      width: DSizes.iconLg * 1.2,
-                      height: DSizes.iconLg * 1.2,
-                      child: Center(
-                          child: Icon(Iconsax.add, color: DColors.white))),
-                ),
+                ProductCartAddToCartButton(product: product),
+
               ],
             )
           ],
