@@ -1,3 +1,4 @@
+import 'package:devhub_kenya/features/shop/controllers/product/cart_controller.dart';
 import 'package:devhub_kenya/features/shop/controllers/product/images_controller.dart';
 import 'package:devhub_kenya/features/shop/models/product_model.dart';
 import 'package:devhub_kenya/features/shop/models/product_variation_model.dart';
@@ -32,6 +33,12 @@ class VariationController extends GetxController {
     if (selectedVariation.image.isNotEmpty) {
       ImagesController.instance.selectedProductImage.value =
           selectedVariation.image;
+    }
+
+    // Show selected variation quantity in cart
+    if (selectedVariation.id.isNotEmpty) {
+      final cartController = CartController.instance;
+      cartController.productQuantityInCart.value = cartController.getVariationQuantityInCart(product.id, selectedVariation.id);
     }
 
     // Assign Selected Variation

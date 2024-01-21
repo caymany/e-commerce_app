@@ -35,7 +35,7 @@ class StoreScreen extends StatelessWidget {
               .textTheme
               .headlineMedium),
           actions: [
-            DCartCountericon(onPressed: () {}, iconColor: Colors.black),
+            const DCartCountericon(iconColor: Colors.black),
           ],
         ),
         body: NestedScrollView(

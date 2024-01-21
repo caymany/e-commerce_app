@@ -27,6 +27,7 @@ class DImages {
   static const String newDocerAnim = "assets/images/animations/Teal Docer Animation.json";
   static const String emptyCart = "assets/images/animations/sammy-grocery-cart-1.gif";
   static const String emptyWishlist = "assets/images/animations/wish.json";
+  static const String cartAnim = "assets/images/animations/cartanim.json";
 
   //  Category Icons
 

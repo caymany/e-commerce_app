@@ -1,6 +1,7 @@
 import 'package:devhub_kenya/common/widgets/images/d_rounded_images.dart';
 import 'package:devhub_kenya/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:devhub_kenya/common/widgets/texts/product_title_text.dart';
+import 'package:devhub_kenya/features/shop/models/cart_item_model.dart';
 import 'package:devhub_kenya/utils/constants/colors.dart';
 import 'package:devhub_kenya/utils/constants/image_strings.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
@@ -10,7 +11,10 @@ import 'package:flutter/material.dart';
 class DCartItem extends StatelessWidget {
   const DCartItem({
     super.key,
+    required this.cartItem,
   });
+
+  final CartItemModel cartItem;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +22,10 @@ class DCartItem extends StatelessWidget {
       children: [
         /// Image
         DRoundedImage(
-          imageUrl: DImages.canonG3420,
+          imageUrl: cartItem.image ?? '',
           width: 60,
           height: 60,
+          isNetworkImage : true,
           padding: const EdgeInsets.all(DSizes.sm),
           backgroundColor: DHelperFunctions.isDarkMode(context)
               ? DColors.darkerGrey
@@ -34,22 +39,31 @@ class DCartItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const DBrandTitleWithVerifiedIcon(title: 'Canon'),
-              const Flexible(
-                child: DProductTitleText(
-                    title: 'Canon Prixma Printer', maxLines: 1),
+              DBrandTitleWithVerifiedIcon(title: cartItem.brandName ?? ''),
+              Flexible(
+                child: DProductTitleText(title: cartItem.title, maxLines: 1),
               ),
 
               /// Attributes
-              Text.rich(TextSpan(
-                  children: [
-                    TextSpan(text: ' Color ', style: Theme.of(context).textTheme.bodySmall),
-                    TextSpan(text: ' Green ', style: Theme.of(context).textTheme.bodyLarge),
-
-                    TextSpan(text: ' Size ', style: Theme.of(context).textTheme.bodySmall),
-                    TextSpan(text: ' A4 & A5 ', style: Theme.of(context).textTheme.bodyLarge),
-                  ]
-              ))
+              Text.rich(
+                TextSpan(
+                  children: (cartItem.selectedVariation ?? {})
+                      .entries
+                      .map(
+                        (e) => TextSpan(
+                          children: [
+                            TextSpan(
+                                text: ' ${e.key}',
+                                style: Theme.of(context).textTheme.bodySmall),
+                            TextSpan(
+                                text: ' ${e.key}',
+                                style: Theme.of(context).textTheme.bodyLarge),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
             ],
           ),
         )

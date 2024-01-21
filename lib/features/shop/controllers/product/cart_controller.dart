@@ -5,6 +5,7 @@ import 'package:devhub_kenya/utils/constants/enums.dart';
 import 'package:devhub_kenya/utils/local_storage/storage_utility.dart';
 import 'package:devhub_kenya/utils/popups/loaders.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class CartController extends GetxController {
   static CartController get instance => Get.find();
@@ -66,6 +67,68 @@ class CartController extends GetxController {
 
     updateCart();
     DLoaders.customToast(message: 'Your product has been added to cart');
+  }
+
+  void addOneToCart(CartItemModel item) {
+    int index = cartItems.indexWhere((cartItem) =>
+        cartItem.productId == item.productId &&
+        cartItem.variationId == item.variationId);
+
+    if (index >= 0) {
+      cartItems[index].quantity += 1;
+    } else {
+      cartItems.add(item);
+    }
+
+    updateCart();
+  }
+
+  void removeOneItemFromCart(CartItemModel item) {
+    int index = cartItems.indexWhere((cartItem) =>
+        cartItem.productId == item.productId &&
+        cartItem.variationId == item.variationId);
+
+    if (index >= 0) {
+      if (cartItems[index].quantity > 1) {
+        cartItems[index].quantity -= 1;
+      } else {
+        // Shoe Dialog before completely removing all
+        cartItems[index].quantity == 1 ? removeFromCartDialog(index) : cartItems.removeAt(index);
+      }
+      updateCart();
+    }
+  }
+  /// Remove item dialog
+  void removeFromCartDialog(int index) {
+    Get.defaultDialog(
+      title: 'Remove Product',
+      middleText: 'Are you sure you want to remove this product',
+      onConfirm: (){
+        // Remove the item completely
+        cartItems.removeAt(index);
+        updateCart();
+        DLoaders.customToast(message: 'Product removed from the cart');
+        Get.back();
+      },
+      onCancel: () => () => Get.back(),
+    );
+  }
+
+  /// -- Initialize already added products in cart
+  void updateAlreadyAddedProductCount(ProductModel product) {
+    // If product has no variations then calculate cart entries and display total number
+    // Else make default entries to 0 and shoe cartEntries when variation is selected
+    if(product.productType == ProductType.single.toString()) {
+      productQuantityInCart.value = getProductQuantityInCart(product.id);
+    } else {
+      // Get Selected variation if any
+      final variationId = variationController.selectedVariation.value.id;
+      if(variationId.isNotEmpty) {
+        productQuantityInCart.value = getVariationQuantityInCart(product.id, variationId);
+      } else {
+        productQuantityInCart.value = 0;
+      }
+    }
   }
 
   /// Function to covert product model into cart model
@@ -142,9 +205,9 @@ class CartController extends GetxController {
   // Get variation Quantity in cart
   int getVariationQuantityInCart(String productId, String variationId) {
     final foundItem = cartItems.firstWhere(
-        (item) => item.productId == productId && item.variationId == variationId,
-        orElse: () => CartItemModel.empty()
-    );
+        (item) =>
+            item.productId == productId && item.variationId == variationId,
+        orElse: () => CartItemModel.empty());
     return foundItem.quantity;
   }
 

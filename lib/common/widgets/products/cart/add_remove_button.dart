@@ -1,4 +1,5 @@
 import 'package:devhub_kenya/common/widgets/icons/d_circular_icon.dart';
+import 'package:devhub_kenya/features/shop/controllers/product/cart_controller.dart';
 import 'package:devhub_kenya/utils/constants/colors.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
 import 'package:devhub_kenya/utils/helpers/helper_functions.dart';
@@ -7,8 +8,11 @@ import 'package:iconsax/iconsax.dart';
 
 class DProductQuantityWithAddRemove extends StatelessWidget {
   const DProductQuantityWithAddRemove({
-    super.key,
+    super.key, required this.quantity, this.add, this.remove,
   });
+
+  final int quantity;
+  final VoidCallback? add, remove;
 
   @override
   Widget build(BuildContext context) {
@@ -26,18 +30,20 @@ class DProductQuantityWithAddRemove extends StatelessWidget {
           backgroundColor: DHelperFunctions.isDarkMode(context)
               ? DColors.darkerGrey
               : DColors.light,
+          onPressed: remove,
         ),
         const SizedBox(width: DSizes.spaceBtwItems),
-        Text('2',
+        Text(quantity.toString(),
             style: Theme.of(context).textTheme.titleSmall),
         const SizedBox(width: DSizes.spaceBtwItems),
-        const DCircularIcon(
+        DCircularIcon(
           icon: Iconsax.add,
           width: 32,
           height: 32,
           size: DSizes.md,
           color: DColors.white,
           backgroundColor: DColors.primary,
+          onPressed: add,
         ),
       ],
     );
