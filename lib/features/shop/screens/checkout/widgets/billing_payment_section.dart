@@ -1,5 +1,6 @@
 import 'package:devhub_kenya/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:devhub_kenya/common/widgets/texts/section_heading.dart';
+import 'package:devhub_kenya/features/shop/controllers/product/checkout_controller.dart';
 import 'package:devhub_kenya/utils/constants/colors.dart';
 import 'package:devhub_kenya/utils/constants/image_strings.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
@@ -11,6 +12,7 @@ class DBillingPaymentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = CheckoutController.instance;
     final dark = DHelperFunctions.isDarkMode(context);
     return Column(
       children: [
