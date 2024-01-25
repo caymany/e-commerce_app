@@ -6,6 +6,5 @@ class OrderController extends GetxController {
   static OrderController instance = Get.find();
 
   /// Variables
-  final OrdersModel order;
 
 }

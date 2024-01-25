@@ -17,7 +17,7 @@ class DBillingAmountSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Subtotal', style: Theme.of(context).textTheme.bodyMedium),
-            Text('Ksh $subTotal', style: Theme.of(context).textTheme.bodyMedium),
+            Text('Ksh $subTotal', style: Theme.of(context).textTheme.titleLarge),
           ],
         ),
         const SizedBox(height: DSizes.spaceBtwItems / 2),
@@ -27,7 +27,7 @@ class DBillingAmountSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Shipping Fee', style: Theme.of(context).textTheme.bodyMedium),
-            Text('Ksh ${DPricingCalculator.calculateShippingCost(subTotal, 'Nairobi')}', style: Theme.of(context).textTheme.labelLarge),
+            Text('Ksh ${DPricingCalculator.calculateShippingCost(subTotal, 'Nairobi')}', style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),
         const SizedBox(height: DSizes.spaceBtwItems / 2),
@@ -37,7 +37,7 @@ class DBillingAmountSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('VAT', style: Theme.of(context).textTheme.bodyMedium),
-            Text('Ksh ${DPricingCalculator.calculateTax(subTotal, 'Nairobi')}', style: Theme.of(context).textTheme.titleMedium),
+            Text('Ksh ${DPricingCalculator.calculateTax(subTotal, 'Nairobi')}', style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),
         const SizedBox(height: DSizes.spaceBtwItems / 2),
@@ -46,7 +46,7 @@ class DBillingAmountSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Order Total', style: Theme.of(context).textTheme.bodyMedium),
-            Text('Ksh ${DPricingCalculator.calculateTotalPrice(subTotal, 'Nairobi')}', style: Theme.of(context).textTheme.titleMedium),
+            Text('Ksh ${DPricingCalculator.calculateTotalPrice(subTotal, 'Nairobi')}', style: Theme.of(context).textTheme.titleLarge),
           ],
         ),
         const SizedBox(height: DSizes.spaceBtwItems / 2),

@@ -2,6 +2,7 @@ import 'package:devhub_kenya/common/widgets/appbar/appbar.dart';
 import 'package:devhub_kenya/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:devhub_kenya/common/widgets/products/cart/coupon_widget.dart';
 import 'package:devhub_kenya/common/widgets/success_screen/success_screen.dart';
+import 'package:devhub_kenya/features/shop/controllers/product/cart_controller.dart';
 import 'package:devhub_kenya/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:devhub_kenya/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:devhub_kenya/features/shop/screens/checkout/widgets/billing_amount_section.dart';
@@ -10,6 +11,7 @@ import 'package:devhub_kenya/utils/constants/colors.dart';
 import 'package:devhub_kenya/utils/constants/image_strings.dart';
 import 'package:devhub_kenya/utils/constants/sizes.dart';
 import 'package:devhub_kenya/utils/helpers/helper_functions.dart';
+import 'package:devhub_kenya/utils/helpers/pricing_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +20,8 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartController = CartController.instance;
+    final subTotal = cartController.totalCartPrice.value;
     final dark = DHelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: DAppBar(
@@ -73,7 +77,7 @@ class CheckoutScreen extends StatelessWidget {
                 onPressed: (){},
             ),
             ),
-            child: const Text('Checkout Ksh 11,000')),
+            child:Text('Checkout Ksh ${DPricingCalculator.calculateTotalPrice(subTotal, 'Nairobi')}')),
       ),
     );
   }

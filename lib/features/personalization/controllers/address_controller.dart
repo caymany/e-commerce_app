@@ -1,8 +1,12 @@
 import 'package:devhub_kenya/common/widgets/loaders/circular_loader.dart';
+import 'package:devhub_kenya/common/widgets/texts/section_heading.dart';
 import 'package:devhub_kenya/data/repositories/addresses/address_repository.dart';
 import 'package:devhub_kenya/data/services/network_manager.dart';
 import 'package:devhub_kenya/features/personalization/models/address_model.dart';
+import 'package:devhub_kenya/features/personalization/screens/address/widgets/single_address.dart';
 import 'package:devhub_kenya/utils/constants/image_strings.dart';
+import 'package:devhub_kenya/utils/constants/sizes.dart';
+import 'package:devhub_kenya/utils/helpers/cloud_helper_function.dart';
 import 'package:devhub_kenya/utils/popups/full_screen_loader.dart';
 import 'package:devhub_kenya/utils/popups/loaders.dart';
 import 'package:flutter/cupertino.dart';
@@ -125,6 +129,40 @@ class AddressController extends GetxController {
       DFullscreenLoader.stopLoading();
       DLoaders.errorSnackBar(title: 'Something went wrong', message: e.toString());
     }
+  }
+
+  /// Show address modal at the checkout page
+  Future<dynamic> selectNewAddressPopup(BuildContext context) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (_) => Container(
+          padding: EdgeInsets.all(DSizes.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const DSectionHeading(title: 'Select Address'),
+              FutureBuilder(
+                  future: getAllUserAddresses(),
+                  builder: (_, snapshot) {
+                    // Helper functions to handle loaders and errors
+                    final response = DCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot);
+                    if(response != null) return response;
+
+                    return ListView.builder(
+                      shrinkWrap: true,
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (_, index) => DSingleAddress(
+                          address: snapshot.data![index],
+                          onTap: () async {
+                            await selectedAddress(snapshot.data![index]);
+                            Get.back();
+                          } ),
+                    );
+                  })
+            ],
+          ),
+        ),
+    );
   }
 
   /// reset Forms
