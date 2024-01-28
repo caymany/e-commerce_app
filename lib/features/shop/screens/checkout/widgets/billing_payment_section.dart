@@ -15,26 +15,25 @@ class DBillingPaymentSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(CheckoutController());
     final dark = DHelperFunctions.isDarkMode(context);
-    return Column(
-      children: [
-        DSectionHeading(title: 'Payment Method', buttonTitle: 'Change',onPressed: () => controller.selectPaymentMethod(context)),
-        const SizedBox(height: DSizes.defaultSpace / 2),
-        Obx(
-          () => Row(
-            children: [
-              DRoundedContainer(
-                width: 60,
-                height: 60,
-                backgroundColor: dark ? DColors.light : DColors.white,
-                padding: const EdgeInsets.all(DSizes.sm),
-                child: Image(image: AssetImage(controller.selectedPaymentMethod.value.image), fit: BoxFit.cover),
-              ),
-              const SizedBox(width: DSizes.spaceBtwItems/2),
-              Text(controller.selectedPaymentMethod.value.name, style: Theme.of(context).textTheme.bodyLarge),
-            ],
-          ),
-        )
-      ],
+    return Obx(() => Column(
+        children: [
+          DSectionHeading(title: 'Payment Method', buttonTitle: 'Change',onPressed: () => controller.selectPaymentMethod(context)),
+          const SizedBox(height: DSizes.defaultSpace / 2),
+          Row(
+              children: [
+                DRoundedContainer(
+                  width: 60,
+                  height: 60,
+                  backgroundColor: dark ? DColors.light : DColors.white,
+                  padding: const EdgeInsets.all(DSizes.sm),
+                  child: Image(image: AssetImage(controller.selectedPaymentMethod.value.image), fit: BoxFit.cover),
+                ),
+                const SizedBox(width: DSizes.spaceBtwItems/2),
+                Text(controller.selectedPaymentMethod.value.name, style: Theme.of(context).textTheme.bodyLarge),
+              ],
+            ),
+        ],
+      ),
     );
   }
 }
