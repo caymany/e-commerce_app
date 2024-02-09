@@ -155,7 +155,8 @@ class ProductRepository extends GetxController {
           .where(FieldPath.documentId, whereIn: productIds)
           .get();
 
-      // Extract brand names or other relevant data
+
+      /// Extract brand names or other relevant data
       List<ProductModel> products = productsQuery.docs
           .map((doc) => ProductModel.fromSnapshot(doc))
           .toList();
